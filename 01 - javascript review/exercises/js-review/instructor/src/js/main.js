@@ -118,8 +118,17 @@ list.innerHTML = renderTaskList(tasks)
 // - Create a <p> element
 // - Set its textContent
 // - Append it to the output element
+function addMessage(message) {
+    const p = document.createElement('p'); // you're specifying an HTML object 'type', 
+                                           // *not* writing raw HTML with a string
+    p.textContent = message; // add some text to the new paragraph element
+    output.appendChild(p);   // then append the new element to an existing DOM element
+}
+
+
 
 // TODO: Test the addMessage function
+addMessage('This message was appended with document.createElement');
 
 // --------------------------------------------------
 // STEP 7: Events – connect UI to behavior
@@ -130,11 +139,23 @@ list.innerHTML = renderTaskList(tasks)
 // - Clear output
 // - Add a few messages
 // - Render the task list
+function runDemo() {
+    output.innerHTML = '';
+    addMessage('Running demo...') // I can reuse that function!
+    addMessage(formatResult('5 + 8', add(5, 8))) // I can reuse all the functions!
+    list.innerHTML = renderTaskList(tasks) // manually call our function to re-render the list
+}
 
 // TODO: Create a function clearUI()
 // - Clear both output and todo list containers
+function clearUI() {
+    output.innerHTML = '';
+    list.innerHTML = '';
+}
 
 // TODO: Add click listeners for btnRun and btnClear
+btnRun.addEventListener("click", runDemo)
+btnClear.addEventListener("click", clearUI)
 
 // --------------------------------------------------
 // STEP 8: Mini extension – Adding tasks
