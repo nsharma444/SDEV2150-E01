@@ -104,6 +104,13 @@ function renderTaskList(items) {
 // - Append it to the output element
 
 // TODO: Test the addMessage function
+function addMessage (message){
+    const p = document.createElement('p');
+    p.textContent = message;
+    output.appendChild(p);
+}   
+
+addMessage('This message was appended with createElement');
 
 // --------------------------------------------------
 // STEP 7: Events – connect UI to behavior
@@ -114,6 +121,22 @@ function renderTaskList(items) {
 // - Clear output
 // - Add a few messages
 // - Render the task list
+function runDemo(){
+    output.innerHTML = '';
+    addMessage('Running demo...');
+    addMessage(formatResult('5 + 8', add(5, 8)));
+    list.innerHTML = renderTaskList(tasks);
+}
+
+
+function clearUI(){
+    output.innerHTML = '';
+    list.innerHTML = '';
+
+}
+
+btnRun.addEventListener('click', runDemo);
+btnClear.addEventListener('click', clearUI);
 
 // TODO: Create a function clearUI()
 // - Clear both output and todo list containers
