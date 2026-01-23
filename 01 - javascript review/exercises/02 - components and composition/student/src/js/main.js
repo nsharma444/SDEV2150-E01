@@ -5,7 +5,7 @@
 // --------------------------------------------------
 // TODO: Create these files in src/js/components/ and then uncomment imports.
 
-// import './components/resource-header.js';
+import './components/resource-header.js';
 // import './components/resource-filters.js';
 // import './components/resource-results.js';
 // import './components/resource-details.js';
