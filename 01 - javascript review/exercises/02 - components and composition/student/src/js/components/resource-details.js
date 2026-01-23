@@ -1,3 +1,7 @@
+const template = document.createElement("template");
+template.innerHTML = `
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
 <div class="card h-100">
           <div class="card-header">
             <strong>Details</strong>
@@ -26,4 +30,15 @@
             <button class="btn btn-outline-secondary" type="button">Copy email</button>
             <button class="btn btn-outline-primary" type="button">Open map</button>
           </div>
-        </div>
+        </div>`
+        
+class ResourceDetails extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open"});
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+}
+
+customElements.define("resource-details", ResourceDetails);
+  

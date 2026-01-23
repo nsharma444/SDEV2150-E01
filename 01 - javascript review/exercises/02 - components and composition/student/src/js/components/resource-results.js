@@ -1,3 +1,7 @@
+const template = document.createElement("template");
+template.innerHTML = `
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
 <div class="card h-100">
           <div class="card-header d-flex justify-content-between align-items-center">
             <strong>Results</strong>
@@ -42,3 +46,13 @@
             </button>
           </div>
         </div>
+        `
+  class ResourceResults extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open"});
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+}
+
+customElements.define("resource-results", ResourceResults);
