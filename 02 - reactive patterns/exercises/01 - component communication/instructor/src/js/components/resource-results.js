@@ -45,7 +45,18 @@ class ResourceResults extends HTMLElement {
   _handleResultClick(event) {
     const button = event.target.closest('button[data-id]');
     if (button) {
-      // snipe for the specific result row that got clicked.
+      // Final touch: highlight the selected element when clicked.
+      // 1) If there was already a currently active button, find it and toggle it off.
+      //    -> Taking the opportunity to show you optional method chaining. Instead of:
+      //         if (possibleItem) { doAThing() }
+      //       we can just:
+      //         possibleItem?.doAThing();
+      this.shadowRoot.querySelector('button.active')?.classList.remove('active');
+      // 2) Slap the active bootstrap class on the clicked button and watch the responsive fanciness happen
+      button.classList.add('active');
+
+
+      // To prepare click event, first snipe for which item got clicked, so we can grab its data.
       // -> this is why we always implement a unique identifier for each element in a series!
       const resultID = button.getAttribute('data-id');
       const result = this.#results.find(r => r.id === resultID);  // note that we're finding the data object from the array, not the UI row!
