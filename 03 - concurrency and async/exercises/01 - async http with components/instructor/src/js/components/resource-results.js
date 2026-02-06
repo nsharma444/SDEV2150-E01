@@ -89,11 +89,17 @@ class ResourceResults extends HTMLElement {
     return ['source'];  // array of attributes I'm monitoring
   }
 
-  attributeChangedCallback(name, oldVal, newVal) {
+  attributeChangedCallback(name, oldVal, newVal) { // HTMLElement callback function to execute upon change
     // 1.a) check if name matches the attribute we want to execute logic for (I might be monitoring multiple attributes)
     // 1.b) check if value has changed
-    // 2. if checks pass, fetch the data from the source (i.e. newVal)
-    this.#fetchData(newVal);
+    if (name === 'source' && oldVal !== newVal) {
+      // 2. if checks pass, fetch the data from the source (i.e. newVal)
+      if (this.isConnected) {  
+        // ^ an additional check we can perform to double-check that the node is connected to the DOM
+        // docs: https://developer.mozilla.org/en-US/docs/Web/API/Node/isConnected
+        this.#fetchData(newVal);
+      }
+    }
   }
 
   async #fetchData(source) {
