@@ -6,11 +6,10 @@ In this lesson, we transition from vanilla JavaScript and Web Components to a fr
 
 We will continue working with the **NAIT Resource Directory** domain. The backend folder remains unchanged and can be reused for future lessons, but this lesson focuses only on front-end setup and static UI components.
 
-0. Extract the starter zip and rename the folder to `lesson-07`
-1. Move into the lesson-07/ directory:
-   ```sh
-   cd lesson-07
-   ```
+> We won't be using the backend yet; it's just there for consistency from the examples prior to React.
+
+1. Start a terminal in the project base directory (e.g. just inside `student`, `instructor`).
+
 2. Scaffold a new Vite project:
    ```sh
    npm create vite@latest .
