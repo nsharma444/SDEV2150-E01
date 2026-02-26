@@ -11,10 +11,12 @@ function App() {
 
     return (
       <>
-        <Header />
-        <Filters />
-        <Results />
-        <Details />
+        <Header tagline="I was supposed to come up with something, but have no imagination." />
+        <div className="flex flex-col gap-6 lg:grid lg:grid-cols-3">
+          <Filters className="w-full" />
+          <Results className="w-full" />
+          <Details className="w-full" />
+        </div>
       </>
     );
 }
