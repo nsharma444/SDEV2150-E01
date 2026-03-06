@@ -21,6 +21,13 @@ export default function Filters({
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    // Pop up a warning if Filter is clicked with no filter options selected.
+    if (!searchTerm.trim() && selectedCategories.length === 0 && !openNow) {
+      alert('Please select at least one filter option.');
+      return;
+    }
+
     console.log('Filters submitted');
   }
 
