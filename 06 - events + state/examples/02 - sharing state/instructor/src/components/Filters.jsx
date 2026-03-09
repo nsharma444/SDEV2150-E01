@@ -1,13 +1,18 @@
-import { useState } from 'react';
 import Card from './ui/Card';
 
-export default function Filters() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [openNowOnly, setOpenNowOnly] = useState(false);
+export default function Filters({
+  searchTerm,
+  onSearchChange,
+  selectedCategories,
+  onCategoriesChange,
+  openNow,
+  onOpenNowChange,
+  virtual,
+  onVirtualChange,
+}) {
 
   function toggleCategory(category) {
-    setSelectedCategories((prev) => {
+    onCategoriesChange((prev) => {
       if (prev.includes(category)) {
         return prev.filter((c) => c !== category);
       }
@@ -18,6 +23,13 @@ export default function Filters() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    // Pop up a warning if Filter is clicked with no filter options selected.
+    if (!searchTerm.trim() && selectedCategories.length === 0 && !openNow) {
+      alert('Please select at least one filter option.');
+      return;
+    }
+
     console.log('Filters submitted');
   }
 
@@ -34,7 +46,7 @@ export default function Filters() {
               type="text"
               placeholder="Try: tutoring, mental health, bursary"
               className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => onSearchChange(e.target.value)}
               value={searchTerm}
             />
           </div>
@@ -68,8 +80,8 @@ export default function Filters() {
                 type="checkbox"
                 id="openNow"
                 className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-600 accent-sky-600"
-                checked={openNowOnly}
-                onChange={(e) => setOpenNowOnly(e.target.checked)}
+                checked={openNow}
+                onChange={(e) => onOpenNowChange(e.target.checked)}
               />
               Open now
             </label>
@@ -80,6 +92,8 @@ export default function Filters() {
                 type="checkbox"
                 id="virtual"
                 className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-600 accent-sky-600"
+                onChange={(e) => onVirtualChange(e.target.checked)}
+                value={virtual}
               />
               Virtual options
             </label>
@@ -93,9 +107,10 @@ export default function Filters() {
               className="rounded border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
               // First student exercise solution
               onClick={() => {
-                setSearchTerm('');
-                setSelectedCategories([]);
-                setOpenNowOnly(false);
+                onSearchChange('');
+                onCategoriesChange([]);
+                onOpenNowChange(false);
+                onVirtualChange(false);
               }}
             >
               Reset
@@ -107,7 +122,7 @@ export default function Filters() {
               Filter
             </button>
             {/* <p className="text-sm">
-              Open now only: {openNowOnly ? 'Yes' : 'No'}
+              Open now only: {openNow ? 'Yes' : 'No'}
             </p> */}
           </div>
         </form>
