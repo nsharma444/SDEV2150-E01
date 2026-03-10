@@ -32,7 +32,7 @@ export function useSelectedResource() {
 	)
 
 
-	export function updateSelectedResource(resource) {
+	function updateSelectedResource(resource) {
 		// We'll be using this to write a resource to the session storage.
 		// This function will act like the 'setter' for our custom hook, and wrap the actual state setter (setSelectedResource).
 
