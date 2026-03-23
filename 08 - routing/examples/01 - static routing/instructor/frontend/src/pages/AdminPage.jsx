@@ -32,6 +32,32 @@ export default function AdminPage() {
   */}
   const { resources, isLoading, error, refetch } = useResources();
 
+  async function handleCreateResource(e) {
+    e.preventDefault();
+
+    const res = await fetch('http://localhost:3000/resources', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!res.ok) {
+      throw new Error('Could not create resource');
+    }
+
+    // Here's that function we returned from the useResources hook to give
+    // downstream components a way to reiniate data fetching independently
+    // of useEffect, which relies on state/props changing - e.g. a "Try again" button.
+    
+    // Most well-configured APIs return the thing you just created in a successful
+    // response body, so needing this refetch depends on how a specific API works.
+    // But, the idea here is, we just made something new, so let's grab fresh data
+    // to render from (which will include the thing we just made).
+    refetch();
+  }
+
   return (
     <>
       <div>
@@ -71,7 +97,7 @@ export default function AdminPage() {
         <Card title="Resource Form">
           <div className="card-body">
 
-            <form id="frm-add-resource" className="space-y-4">
+            <form onSubmit={handleCreateResource} id="frm-add-resource" className="space-y-4">
 
               <div className="space-y-1">
                 <label htmlFor="q" className="block text-sm font-medium text-gray-700">
