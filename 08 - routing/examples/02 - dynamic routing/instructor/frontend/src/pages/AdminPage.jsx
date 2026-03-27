@@ -1,6 +1,9 @@
 // react hooks
 import { useState } from 'react';
 
+// react-router hooks
+import { useNavigate, useParams } from 'react-router';
+
 // our custom hooks
 import { useResources } from '../hooks/useResources';
 
@@ -21,6 +24,11 @@ const EXAMPLE_RESOURCE = {
 
 
 export default function AdminPage() {
+
+  const { resourceId } = useParams();  // consume dynamic props from URL/route
+  const navigate = useNavigate()       // lets us programmatically 'push' the user to some page
+
+  console.log(resourceId)
 
   const { resources, isLoading, error, refetch } = useResources();
 
