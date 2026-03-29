@@ -1,14 +1,12 @@
-// temporarily unused
-
 import { useState, useEffect } from 'react';
-import { useResources } from './hooks/useResources';
-import { useSelectedResource } from './hooks/useSelectedResource';
+import { useResources } from '../hooks/useResources';
+import { useSelectedResource } from '../hooks/useSelectedResource';
 
-import Filters from './components/Filters';
-import Results from './components/Results';
-import Details from './components/Details';
+import Filters from '../components/Filters';
+import Results from '../components/Results';
+import Details from '../components/Details';
 
-export function IndexInline() {
+const ResourceDirectoryPage = () => {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -24,8 +22,8 @@ export function IndexInline() {
     console.log('Selected resource has changed', selectedResource);
   }, [selectedResource]);
 
-	return (
-		<>
+  return (
+    <>
       {/* The following is not great for UX/UI, but it gets the point across. Feel free to style
       the loading and error states in "nicer" way. */}
       {isLoading && (
@@ -73,5 +71,7 @@ export function IndexInline() {
         )}
       </aside>
     </>
-  )	
-}    
+  ) 
+}
+
+export default ResourceDirectoryPage;
