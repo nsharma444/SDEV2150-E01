@@ -49,6 +49,7 @@ export default function AdminPage() {
               initialData={EXAMPLE_RESOURCE}
               resources={resources}
               resourceId={resourceId}
+              isEditing={Boolean(resourceId)}
               refetch={refetch}
             />
           </div>

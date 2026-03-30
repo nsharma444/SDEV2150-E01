@@ -4,6 +4,7 @@ export default function AdminForm({
   initialData,
   resources,
   resourceId,
+  isEditing,
   refetch,
 }) {
   {/* 
@@ -54,7 +55,6 @@ export default function AdminForm({
     */}
 
   const [formData, setFormData] = useState(initialData)
-  const [isEditing, setIsEditing] = useState(false);
 
   async function createResource(e) {
     e.preventDefault();
@@ -89,7 +89,6 @@ export default function AdminForm({
         virtual: false,
         openNow: false,
     })
-    setIsEditing(false);
   }
 
   // set up an effect to prepopulate the form data with whatever object corresponds
@@ -108,7 +107,6 @@ export default function AdminForm({
       // if there's no matching resource for the ID, leave the form blank
       if (!resource) return;
 
-      setIsEditing(true);
       setFormData({
         title: resource.title,
         category: resource.category,
