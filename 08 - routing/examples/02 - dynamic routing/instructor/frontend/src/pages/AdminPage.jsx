@@ -33,6 +33,10 @@ export default function AdminPage() {
 
   const { resources, isLoading, error, refetch } = useResources();
 
+  const handleEditStart = (resource) => {
+    navigate(`/admin/${resource.id}`); // navigate programmatically takes you to a path
+  }
+
   return (
     <>
       <div>
@@ -52,6 +56,7 @@ export default function AdminPage() {
               resourceId={resourceId}
               isEditing={Boolean(resourceId)}
               refetch={refetch}
+              navigate={navigate}
             />
           </div>
         </Card>
@@ -70,7 +75,11 @@ export default function AdminPage() {
             )}
             <ul className="space-y-2">
               {resources.map((resource) => (
-                <li key={resource.id} className="rounded border border-gray-200 p-3">
+                <li
+                  key={resource.id}
+                  className="rounded border border-gray-200 p-3"
+                  onClick={() => {handleEditStart(resource)}}
+                >
                   <p className="font-semibold">{resource.title}</p>
                   <p className="text-sm text-base-content/70">{resource.category}</p>
                 </li>

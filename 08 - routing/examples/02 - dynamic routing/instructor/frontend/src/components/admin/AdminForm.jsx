@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { useNavigate } from 'react-router';
+
 export default function AdminForm({
   initialData,
   resources,
@@ -56,6 +58,8 @@ export default function AdminForm({
 
   const [formData, setFormData] = useState(initialData)
 
+  const navigate = useNavigate();
+
   async function createResource(e) {
     e.preventDefault();
     
@@ -79,6 +83,9 @@ export default function AdminForm({
   }
 
   const resetForm = () => {
+    // you can play with this by commenting / uncommenting the setFormData call;
+    // notice how the form value reset persists *across* the route changing (e.g.
+    // when clicking Reset). That's react-router at work!
     setFormData({
         title: '',
         category: '',
@@ -89,6 +96,8 @@ export default function AdminForm({
         virtual: false,
         openNow: false,
     })
+    navigate("/admin")
+
   }
 
   // set up an effect to prepopulate the form data with whatever object corresponds
