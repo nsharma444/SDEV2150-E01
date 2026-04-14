@@ -31,7 +31,7 @@ const router = createBrowserRouter(
         {
           path: "admin/:resourceId",
           Component: AdminPage,
-          loader: AdminLoader
+          loader: AdminLoader,
           action: AdminAction,
         }
       ]
