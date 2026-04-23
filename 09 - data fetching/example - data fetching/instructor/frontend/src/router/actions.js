@@ -1,3 +1,4 @@
+import { redirect } from 'react-router';
 import { saveResource } from '../api/resources';
 
 export async function AdminAction({ request, params }) {

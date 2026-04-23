@@ -1,42 +1,34 @@
-import { useState } from 'react';
-
 import { Form, useNavigate } from 'react-router';
+import { useState } from 'react';
 
 export default function ResourceForm({
   initialData,
   isEditing,
-  isSubmitting
+  isSubmitting,
 }) {
   const [formData, setFormData] = useState(initialData);
+
   const navigate = useNavigate();
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
-    // name & type are fields on the input elements
-    // *so are* value/check, except either one is used depending on textfield vs. checkbox
 
-    setFormData(
-      (prev) => ({
-        ...prev, // take every previous property:value in existing form data,
-        [name]: type === 'checkbox' ? checked : value,
-        // my way of dynamically handling input changes for text & checkbox in one go
-      })
-    )
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
   }
 
   function handleReset() {
     if (isEditing) {
-      navigate('/admin') // make sure you put a leading slash to navigate from URL root
-      // without a leading slash, react-router *appends* the route to your current route
+      navigate('/admin');
     } else {
-      setFormData(initialData)
+      setFormData(initialData);
     }
   }
 
-
   return (
     <Form method="post" className="space-y-4">
-
       <div className="space-y-1">
         <label htmlFor="title" className="block text-sm font-medium text-gray-700">
           Title
@@ -143,8 +135,8 @@ export default function ResourceForm({
       <div className="flex gap-2">
         <button
           type="button"
-          className="rounded border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
           onClick={handleReset}
+          className="rounded border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
         >
           {isEditing ? 'Clear' : 'Reset'}
         </button>
@@ -161,7 +153,6 @@ export default function ResourceForm({
               : 'Add Resource'}
         </button>
       </div>
-
     </Form>
   );
 }

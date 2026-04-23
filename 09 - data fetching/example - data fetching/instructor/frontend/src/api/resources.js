@@ -28,7 +28,7 @@ export async function saveResource(resourceId, payload) {
 
   let url = `${API_BASE_URL}/resources`
   if (resourceId) {
-    url += `${resourceId}`  
+    url += `/${resourceId}`  
   }
 
   const res = await fetch(url, {
@@ -38,7 +38,7 @@ export async function saveResource(resourceId, payload) {
     },
     body: JSON.stringify(payload),
   });
-
+  // console.log(res);
   if (!res.ok) {
     throw new Error(`Could not ${isEditing ? 'update' : 'create'} resource`);
   }
